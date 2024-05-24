@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "b21d4a3e-ccc4-419b-b667-3244556f2d9c",
+		"name": "Weather API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34580579"
+	},
+	"item": [
+		{
+			"name": "http://api.openweathermap.org/data/2.5/weather?q=randomLetters&appid=652bf16ea585500e8e0a76c3244db787&units=metric",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function(){\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Error message is 'city not found'\", function(){\r",
+							"    var jsonData=pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"city not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5/weather?q=randomLetters&appid=652bf16ea585500e8e0a76c3244db787&units=metric",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "randomLetters"
+						},
+						{
+							"key": "appid",
+							"value": "652bf16ea585500e8e0a76c3244db787"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://api.openweathermap.org/data/2.5/weather?q=London&appid=652bf16ea585500e8e0a76c3244db787&units=metric",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"City name is London\", function(){\r",
+							"    var jsonData=pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"London\");\r",
+							"});\r",
+							"pm.test(\"Weather info exists\", function(){\r",
+							"    var jsonData=pm.response.json();\r",
+							"    pm.expect(jsonData.weather).to.an(\"array\");\r",
+							"});\r",
+							"pm.test(\"Main temperature info exists\", function(){\r",
+							"    var jsonData=pm.response.json();\r",
+							"    pm.expect(jsonData.main).to.be.an(\"object\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5/weather?q=London&appid=652bf16ea585500e8e0a76c3244db787&units=metric",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London"
+						},
+						{
+							"key": "appid",
+							"value": "652bf16ea585500e8e0a76c3244db787"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
